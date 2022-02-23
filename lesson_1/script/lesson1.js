@@ -7,7 +7,7 @@ function isValid(number) {
 }
 
 /////// 1 task
-function notationValideNumbers(firstNumber, secondNumber) {
+function numberSystemChange(firstNumber, secondNumber) {
     if (isValid(firstNumber) || isValid(secondNumber)) {
         console.log('Некорректный ввод!');
     } else {
@@ -16,7 +16,7 @@ function notationValideNumbers(firstNumber, secondNumber) {
 }
 
 /////// 2 task
-function sumSubValideNumbers(firstNumber, secondNumber) {
+function sumAndSubtractNumbers(firstNumber, secondNumber) {
     if (isValid(firstNumber)) {
         console.log('Некорректный ввод!');
     } else if (isValid(secondNumber)) {
@@ -26,5 +26,5 @@ function sumSubValideNumbers(firstNumber, secondNumber) {
     }
 }
 
-notationValideNumbers(FIRST_NUMBER, SECOND_NUMBER);
-sumSubValideNumbers(FIRST_NUMBER, SECOND_NUMBER);
+numberSystemChange(FIRST_NUMBER, SECOND_NUMBER);
+sumAndSubtractNumbers(FIRST_NUMBER, SECOND_NUMBER);
