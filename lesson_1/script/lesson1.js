@@ -1,12 +1,12 @@
 const FIRST_NUMBER = +prompt('Введите первое число');
 const SECOND_NUMBER = +prompt('Введите второе число');
 
-/////// Проверка числа на валидность
+/////// Check a number for validity
 function isValid(number) {
     return isNaN(number) || number <= 0;
 }
 
-/////// 1 задание
+/////// 1 task
 function notationValideNumbers(firstNumber, secondNumber) {
     if (isValid(firstNumber) || isValid(secondNumber)) {
         console.log('Некорректный ввод!');
@@ -15,7 +15,7 @@ function notationValideNumbers(firstNumber, secondNumber) {
     }
 }
 
-/////// 2 задание
+/////// 2 task
 function sumSubValideNumbers(firstNumber, secondNumber) {
     if (isValid(firstNumber)) {
         console.log('Некорректный ввод!');
