@@ -16,15 +16,15 @@ function numberSystemChange(firstNumber, secondNumber) {
 }
 
 /////// 2 task
-function sumAndSubtractNumbers(firstNumber, secondNumber) {
+function sumAndQuotientNumbers(firstNumber, secondNumber) {
     if (isValid(firstNumber)) {
         console.log('Некорректный ввод!');
     } else if (isValid(secondNumber)) {
         console.log('Некорректный ввод!');
     } else {
-        console.log(`Ответ: ${firstNumber + secondNumber}, ${firstNumber - secondNumber}.`);
+        console.log(`Ответ: ${firstNumber + secondNumber}, ${firstNumber / secondNumber}.`);
     }
 }
 
 numberSystemChange(FIRST_NUMBER, SECOND_NUMBER);
-sumAndSubtractNumbers(FIRST_NUMBER, SECOND_NUMBER);
+sumAndQuotientNumbers(FIRST_NUMBER, SECOND_NUMBER);
