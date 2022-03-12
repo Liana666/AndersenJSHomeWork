@@ -1,12 +1,21 @@
-# Lesson 1
+# Lesson 2
 
 ## 1 task:
-<li> Use the prompt function to enter two values ​​in turn.
-<li> If both values are valid numbers, then display the result in the console as the first number in the second number system. 
-<li> If at least one number is an invalid, display in the console a message: "Некорректный ввод!" and end the programm.
+<li> Написать свою функцию для глубокого копирования объектов.
+<li> При этом алгоритм должен осуществляться вручную (никаких вариантов с использованием готовых библиотек или JSON.stringify() + JSON.parse()).
+<li> Функция должна называться makeObjectDeepCopy.
+<li> Принимать функция должна один параметр - объект, копию которого нужно сделать.
 
 ## 2 task:
-<li> Use the prompt function to enter two values ​​in turn.
-<li> If first number is an invalid, display in the console a message: "Некорректный ввод!" and end the programm.
-<li> Otherwise, if second number is an invalid, display in the console the same message and end the programm.
-<li> If both values ​​are valid numbers, then display the result in the console in the form:"Ответ: [сумма двух чисел], [частное двух чисел]."
+<li> Написать функцию, которая принимает три аргумента: массив чисел, первое значение интервала, второе значение интервала.
+<li> Результатом вызова функции должен быть массив из значений переданного массива (в качестве первого параметра), которые входят в этот интервал (концы включая).
+<li> Если в качестве первого параметра передан не массив или массив, содержащий не только числа - кидать ошибку (throw new Error(...)).
+<li>  Если хотя бы одно из значений интервала (имеются ввиду параметры функции selectFromInterval) - невалидное число!, то также кидать ошибку.
+<li>  Если первое значение интервала < второго (имеются ввиду параметры функции selectFromInterval), то считать за интервал значения от первого до второго, в ином случае - от второго до первого.
+<li>  Функция должна называться selectFromInterval.
+
+## 3 task:
+<li> Создать обычный объект и сделать его итерируемым
+<li> При этом итерация должна происходить следующим образом: Должны поочерёдно проходиться все значения от свойства объекта from, до свойства to. (в случае если to < from - должна возникать ошибка).
+<li> Если to или from не указаны ИЛИ to или from не являются числами, должна возникать ошибка.
+<li> Объект должен называться myIterable.
