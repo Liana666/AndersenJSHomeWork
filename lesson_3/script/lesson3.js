@@ -1,24 +1,29 @@
 /////////////////////// Helper Functions
 function checkValidFunction(callback) {
-    if (!(typeof callback === 'function' && this)) {
-        throw new Error('Ошибка! Переданное в параметрах значение не является функцией');
+    if (typeof callback === 'function' && this) {
+        return;
     }
+
+
+    throw new Error('Ошибка! callback не является функцией или this равен null/undefined!');
 }
 
+
 /////////////////////// task 1
-Array.prototype.myFilter = function (callback) {
+Array.prototype.myFilter = function (callback, context) {
+    const thisArray = this;
     let filterArray = [];
-    const thisArr = this;
+
 
     checkValidFunction(callback);
 
-    for (let i = 0; i <= thisArr.length; i++) {
 
-        if (callback(thisArr[i], i, thisArr)) {
-            filterArray.push(thisArr[i]);
+    thisArray.forEach((item, index, array) => {
+        if (callback.call(context, item, index, array)) {
+            filterArray.push(item);
         }
+    });
 
-    }
 
     return filterArray;
 }
@@ -26,18 +31,21 @@ Array.prototype.myFilter = function (callback) {
 
 /////////////////////// task 2
 Array.prototype.myReduce = function (callback, initialValue) {
-    let accumulatorValue = initialValue;
     const thisArray = this;
+    let accumulatorValue = initialValue;
 
-    for (let i = 0; i < thisArray.length; i++) {
 
+    checkValidFunction(callback);
+
+
+    thisArray.forEach((item, index, array) => {
         if (accumulatorValue !== undefined) {
-            accumulatorValue = callback(accumulatorValue, thisArray[i], i, thisArray);
+            accumulatorValue = callback(accumulatorValue, item, index, array);
         } else {
-            accumulatorValue = thisArray[i];
+            accumulatorValue = item;
         }
+    });
 
-    }
 
     return accumulatorValue;
 }
