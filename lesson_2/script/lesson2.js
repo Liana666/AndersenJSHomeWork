@@ -80,6 +80,7 @@ myIterable[Symbol.iterator] = function () {
                     done: true
                 };
             }
+
         }
     };
 };
