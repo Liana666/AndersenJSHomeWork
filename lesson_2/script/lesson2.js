@@ -5,70 +5,79 @@ function isValidNumbers(number) {
     return typeof number === 'number' && Number.isFinite(number);
 }
 
+
 ///// Check a array for validity (is array, every value is number, no NaN and no Infinity)
 function isValidArray(array) {
-    return Array.isArray(array) && array.every((item) => {
-        return isValidNumbers(item);
-    });
+    return Array.isArray(array) && array.every(isValidNumbers);
 }
+
 
 ///// If value not valid throw Error
 function checkedValueIsValid(isValid) {
-    if (!isValid) {
-        throw new Error('Ошибка! невалидное число!');
+    if (isValid) {
+        return;
     }
+
+
+    throw new Error('Ошибка! невалидное число!');
 }
+
 
 //////////////////////// task 1
 function makeObjectDeepCopy(obj) {
     const objDeepCopy = {};
 
-    for (item in obj) {
 
-        if (typeof obj[item] === 'object') {
-            objDeepCopy[item] = makeObjectDeepCopy(obj[item]);
-            continue;
+    Object.keys(obj).forEach((item) => {
+        if (typeof obj[item] !== 'object') {
+            objDeepCopy[item] = obj[item];
+            return;
         }
 
-        objDeepCopy[item] = obj[item];
-    }
+
+        objDeepCopy[item] = makeObjectDeepCopy(obj[item]);
+    });
+
 
     return objDeepCopy;
 }
+
 
 /////////////////////// task 2
 function selectFromInterval(array, startIntervalValue, endIntervalValue) {
     const isValid = isValidArray(array) && isValidNumbers(startIntervalValue) && isValidNumbers(endIntervalValue);
     let includedFromIntervalNumbers = [];
 
+
     checkedValueIsValid(isValid);
 
-    for (let i = 0; i < array.length; i++) {
 
-        if (startIntervalValue < endIntervalValue) {
-            array[i] >= startIntervalValue && array[i] <= endIntervalValue ? includedFromIntervalNumbers.push(array[i]) : null;
-        } else {
-            array[i] >= endIntervalValue && array[i] <= startIntervalValue ? includedFromIntervalNumbers.push(array[i]) : null;
-        }
-
+    if (startIntervalValue < endIntervalValue) {
+        includedFromIntervalNumbers = array.filter((item) => item >= startIntervalValue && item <= endIntervalValue);
+    } else {
+        includedFromIntervalNumbers = array.filter((item) => item >= endIntervalValue && item <= startIntervalValue);
     }
 
-    return includedFromIntervalNumbers.sort((firstValue, secondValue) => {
-        return firstValue - secondValue;
-    });
+
+    return includedFromIntervalNumbers.sort((firstValue, secondValue) => firstValue - secondValue);
 }
+
 
 ///////////////////////////// task 3
 const myIterable = { from: 1, to: 4 };
 
+
 myIterable[Symbol.iterator] = function () {
     let current = this.from;
     let last = this.to;
+
     const isValid = isValidNumbers(current) && isValidNumbers(last) && current < last;
+
 
     return {
         next() {
             checkedValueIsValid(isValid);
+
 
             if (current <= last) {
                 return {
@@ -80,6 +89,7 @@ myIterable[Symbol.iterator] = function () {
                     done: true
                 };
             }
+
 
         }
     };
