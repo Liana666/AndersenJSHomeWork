@@ -1,11 +1,11 @@
 /////////////////////// Helper Functions
-function checkValidFunction(callback) {
-    if (typeof callback === 'function' && this) {
+function checkValidFunction(callback, thisContext) {
+    if (typeof callback === 'function' && thisContext) {
         return;
     }
 
 
-    throw new Error('Ошибка! callback не является функцией или this равен null/undefined!');
+    throw new Error('Ошибка! callback не является функцией или this равен null/ndefined!');
 }
 
 
@@ -15,7 +15,7 @@ Array.prototype.myFilter = function (callback, context) {
     let filterArray = [];
 
 
-    checkValidFunction(callback);
+    checkValidFunction(callback, this);
 
 
     thisArray.forEach((item, index, array) => {
@@ -28,6 +28,7 @@ Array.prototype.myFilter = function (callback, context) {
     return filterArray;
 }
 
+let arr = [1, 2, 3, 4]
 
 /////////////////////// task 2
 Array.prototype.myReduce = function (callback, initialValue) {
@@ -35,7 +36,7 @@ Array.prototype.myReduce = function (callback, initialValue) {
     let accumulatorValue = initialValue;
 
 
-    checkValidFunction(callback);
+    checkValidFunction(callback, this);
 
 
     thisArray.forEach((item, index, array) => {
@@ -49,3 +50,5 @@ Array.prototype.myReduce = function (callback, initialValue) {
 
     return accumulatorValue;
 }
+
+console.log(arr.myReduce((a, b) => a + b))
