@@ -19,9 +19,7 @@ function checkedValueIsValid(isValid) {
     }
 }
 
-
 //////////////////////// task 1
-
 function makeObjectDeepCopy(obj) {
     const objDeepCopy = {};
 
@@ -39,31 +37,28 @@ function makeObjectDeepCopy(obj) {
 }
 
 /////////////////////// task 2
-
 function selectFromInterval(array, startIntervalValue, endIntervalValue) {
     const isValid = isValidArray(array) && isValidNumbers(startIntervalValue) && isValidNumbers(endIntervalValue);
-    let result = [];
+    let includedFromIntervalNumbers = [];
 
     checkedValueIsValid(isValid);
 
     for (let i = 0; i < array.length; i++) {
 
         if (startIntervalValue < endIntervalValue) {
-            array[i] >= startIntervalValue && array[i] <= endIntervalValue ? result.push(array[i]) : null;
+            array[i] >= startIntervalValue && array[i] <= endIntervalValue ? includedFromIntervalNumbers.push(array[i]) : null;
         } else {
-            array[i] >= endIntervalValue && array[i] <= startIntervalValue ? result.push(array[i]) : null;
+            array[i] >= endIntervalValue && array[i] <= startIntervalValue ? includedFromIntervalNumbers.push(array[i]) : null;
         }
 
     }
 
-    return result.sort((firstValue, secondValue) => {
+    return includedFromIntervalNumbers.sort((firstValue, secondValue) => {
         return firstValue - secondValue;
     });
 }
 
-
 ///////////////////////////// task 3
-
 const myIterable = { from: 1, to: 4 };
 
 myIterable[Symbol.iterator] = function () {
