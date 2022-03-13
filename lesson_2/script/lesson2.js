@@ -69,11 +69,10 @@ const myIterable = { from: 1, to: 4 };
 myIterable[Symbol.iterator] = function () {
     let current = this.from;
     let last = this.to;
-    const isValid = isValidNumbers(current) && isValidNumbers(last) && myIterable.from < myIterable.to;
+    const isValid = isValidNumbers(current) && isValidNumbers(last) && current < last;
 
     return {
         next() {
-
             checkedValueIsValid(isValid);
 
             if (current <= last) {
