@@ -54,8 +54,8 @@ class Calculator {
         isValidNumbers(...numbers);
 
 
-        this.num1 = numbers[0];
-        this.num2 = numbers[1];
+        this.firstNumber = numbers[0];
+        this.secondNumber = numbers[1];
     }
 
 
@@ -63,7 +63,7 @@ class Calculator {
         checkedValueIsValid(isValidNumber(num));
 
 
-        this.num1 = num;
+        this.firstNumber = num;
     }
 
 
@@ -71,27 +71,27 @@ class Calculator {
         checkedValueIsValid(isValidNumber(num));
 
 
-        this.num2 = num;
+        this.secondNumber = num;
     }
 
 
     logSum = () => {
-        console.log(this.num1 + this.num2);
+        console.log(this.firstNumber + this.secondNumber);
     }
 
 
     logMul = () => {
-        console.log(this.num1 * this.num2);
+        console.log(this.firstNumber * this.secondNumber);
     }
 
 
     logSub = () => {
-        console.log(this.num1 - this.num2);
+        console.log(this.firstNumber - this.secondNumber);
     }
 
 
     logDiv = () => {
-        console.log(this.num1 / this.num2);
+        console.log(this.firstNumber / this.secondNumber);
     }
 }
 
