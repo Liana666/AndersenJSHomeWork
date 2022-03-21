@@ -1,31 +1,5 @@
-function createArray(obj) {
-    let arrayFromStack = [];
-
-
-    arrayFromStack.push(obj.value);
-
-
-    if (obj.next !== null) {
-        arrayFromStack.push(...createArray(obj.next))
-    }
-
-
-    return arrayFromStack;
-}
-
-
-
-class Node {
-    constructor(value) {
-        this.value = value;
-        this.next = null;
-    }
-}
-
-
 class Stack {
     constructor(maxStack = 10) {
-        this.first = null;
         this.last = null;
         this.length = 0;
         this.maxStack = maxStack;
@@ -37,7 +11,7 @@ class Stack {
 
 
             const stack = new Stack(iterable.length);
-            const iterableReversed = iterable.reverse();
+            const iterableReversed = iterable;
 
 
             iterableReversed.forEach((item) => stack.push(item));
@@ -52,21 +26,20 @@ class Stack {
 
 
     push(elem) {
-        let newNode = new Node(elem);
-
-
         if (this.length == this.maxStack) {
             throw new Error('Ошибка! Stack полный');
         }
 
 
+        let newNode = new Node(elem);
+
+
         if (this.length === 0) {
-            this.first = newNode;
             this.last = newNode;
         } else {
-            let prevFirst = this.first;
-            this.first = newNode;
-            newNode.next = prevFirst;
+            let prevLast = this.last;
+            this.last = newNode;
+            newNode.next = prevLast;
         }
 
 
@@ -75,20 +48,15 @@ class Stack {
 
 
     pop() {
-        let removeNode = this.first;
-
-
         if (this.length === 0) {
             throw new Error('Ошибка! Stack пуст');
         }
 
 
-        if (this.first === this.last) {
-            this.last = null;
-        }
+        let removeNode = this.last;
 
 
-        this.first = this.first.next;
+        this.last = this.last.next;
         this.length--;
 
 
@@ -102,7 +70,7 @@ class Stack {
         }
 
 
-        return this.first.value;
+        return this.last.value;
     }
 
 
@@ -112,6 +80,40 @@ class Stack {
 
 
     toArray() {
-        return createArray(this.first);
+        const count = this.length;
+
+        let arrayFromStack = [];
+        let currentNode = this.last;
+
+
+        for (let i = count; i > 0; i--) {
+            arrayFromStack.push(currentNode.value);
+            currentNode = currentNode.next;
+        }
+
+
+        return arrayFromStack.reverse();
     }
 }
+
+
+class Node {
+    constructor(value) {
+        this.value = value;
+        this.next = null;
+    }
+}
+
+
+
+
+// class LinkedList {
+//     constructor() {
+//         this.first = null;
+//         this.last = null;
+//     }
+// }
+
+
+
+// module.exports = { Stack };
