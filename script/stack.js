@@ -11,12 +11,9 @@ class Stack {
 
 
             const stack = new Stack(iterable.length);
-            const iterableReversed = iterable;
 
 
-            iterableReversed.forEach((item) => stack.push(item));
-
-
+            iterable.forEach((item) => stack.push(item));
             return stack;
         }
 
@@ -38,6 +35,8 @@ class Stack {
             this.last = newNode;
         } else {
             let prevLast = this.last;
+
+
             this.last = newNode;
             newNode.next = prevLast;
         }
@@ -81,8 +80,8 @@ class Stack {
 
     toArray() {
         const count = this.length;
+        const arrayFromStack = [];
 
-        let arrayFromStack = [];
         let currentNode = this.last;
 
 
@@ -105,15 +104,5 @@ class Node {
 }
 
 
+module.exports = { Stack };
 
-
-// class LinkedList {
-//     constructor() {
-//         this.first = null;
-//         this.last = null;
-//     }
-// }
-
-
-
-// module.exports = { Stack };
