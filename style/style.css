@@ -1,0 +1,128 @@
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+
+    min-height: 100vh;
+    background: #EFF3FE;
+
+    font-family: 'Montserrat', sans-serif;
+    color: #5A6770;
+    
+}
+
+.calculator {
+    position: absolute;
+    height: fit-content;
+    padding: 20px;
+    width: 465px;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    border-radius: 46px;
+    background: #EFF3FE;
+    box-shadow:  30px 30px 64px #d7dbe5,
+             -30px -30px 64px #ffffff;
+}
+
+.calculator__view {
+    margin: 0 12px 13px 12px;
+    min-height: 135px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: end;
+    text-align: end;
+}
+
+/* .calculator__previos-view {
+    font-size: 20px;
+    line-height: 140%;
+
+    color: #5a677096;
+} */
+
+.calculator__current-view {
+    width: 100%;
+
+    border: none;
+    background: none;
+
+    font-family: 'Montserrat', sans-serif;   
+    font-size: 40px;
+    line-height: 140%;
+    text-align: end;
+
+    color: #5A6770;
+}
+
+.calculator__keyboard {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.calculator__key {
+    padding: 10px;
+    margin: 7px;
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    border-radius: 46px;
+    border: none;
+    background: #EFF3FE;
+    color: #5A6770;
+    box-shadow:  30px 30px 64px #d7dbe5,
+                -30px -30px 64px #ffffff;
+
+    font-family: 'Montserrat', sans-serif;            
+    font-size: 20px;
+    line-height: 140%;    
+    
+    opacity: 0.65;
+    transition: 0.5s ease 0s;
+}
+
+.calculator__key:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.calculator__key_gray {
+    background: #7878781a;
+}
+
+.calculator__key_delete {
+    background: #FEB92D;
+    color: #fff;
+}
+
+.calculator__key_orange {
+    background: #F9DEA0;
+    color: #765f34;
+
+    font-weight: 700;
+}
+
+
+.calculator__key_purple {
+    font-size: 26px;
+    
+    background:#DFC3F1;
+    color: #552574;
+}
+
+.calculator__key_equal {
+    background: #A635FE;
+    color: #fff;
+}

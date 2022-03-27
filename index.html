@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="calculator">
+
+        <form class="calculator__view">
+            <!-- <div data-previos-view class="calculator__previos-view"></div>
+            <input  >0</input> -->
+            <input data-view class="calculator__current-view" type="text" placeholder="0" readonly>
+        </form>
+
+        <div class="calculator__keyboard">
+            <button data-operation class="calculator__key calculator__key_gray">deg</button>
+            <button data-operation class="calculator__key calculator__key_gray">sin</button>
+            <button data-operation class="calculator__key calculator__key_gray">cos</button>
+            <button data-operation class="calculator__key calculator__key_gray">tan</button>
+            <button data-operation class="calculator__key calculator__key_gray">ctg</button>
+
+            <button data-operation class="calculator__key calculator__key_gray">xᵞ</button>
+            <button data-operation class="calculator__key calculator__key_gray">lg</button>
+            <button data-operation class="calculator__key calculator__key_gray">In</button>
+            <button class="calculator__key calculator__key_gray">(</button>
+            <button class="calculator__key calculator__key_gray">)</button>
+
+            <button data-operation class="calculator__key calculator__key_gray">x²</button>
+            <button data-all-clear class="calculator__key calculator__key_delete">AC</button>
+            <button data-delete class="calculator__key calculator__key_orange">⌫</button>
+            <button data-operation class="calculator__key calculator__key_orange">%</button>
+            <button data-operation class="calculator__key calculator__key_purple">&divide;</button>
+
+            <button data-operation class="calculator__key calculator__key_gray">&radic;x</button>
+            <button data-number class="calculator__key">7</button>
+            <button data-number class="calculator__key">8</button>
+            <button data-number class="calculator__key">9</button>
+            <button data-operation class="calculator__key calculator__key_purple">&times;</button>
+
+            <button class="calculator__key calculator__key_gray">x!</button>
+            <button data-number class="calculator__key">4</button>
+            <button data-number class="calculator__key">5</button>
+            <button data-number class="calculator__key">6</button>
+            <button data-operation class="calculator__key calculator__key_purple">-</button>
+
+            <button data-operation class="calculator__key calculator__key_gray">1/x</button>
+            <button data-number class="calculator__key">1</button>
+            <button data-number class="calculator__key">2</button>
+            <button data-number class="calculator__key">3</button>
+            <button data-operation class="calculator__key calculator__key_purple">+</button>
+
+            <button class="calculator__key calculator__key_gray">𝜋</button>
+            <button class="calculator__key">e</button>
+            <button data-number class="calculator__key">0</button>
+            <button data-number class="calculator__key">.</button>
+            <button data-equal class="calculator__key calculator__key_equal">=</button>
+        </div>
+
+
+    </div>
+
+
+
+    <script src="script/script.js"></script>
+</body>
+
+</html>
