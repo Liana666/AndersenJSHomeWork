@@ -8,7 +8,9 @@ class Calculator {
     }
 
     clear() {
-        this.#currenOperand = 0;
+        this.#currenOperand = '';
+        this.#previosOperand = '';
+        this.#operation = '';
     }
 
     delete() {
@@ -72,7 +74,6 @@ class Calculator {
 
     updateView() {
         this.formValue.value = this.#previosOperand + this.#operation + this.#currenOperand;
-        //this.previosOperandText.innerText = this.#previosOperand;
     }
 
 
@@ -104,6 +105,13 @@ keyboard.addEventListener('click', function onclickKey(e) {
     if (e.target.hasAttribute('data-equal')) {
         calculator.compute();
         calculator.updateView();
+        calculator.clear();
+    }
+
+    if (e.target.hasAttribute('data-all-clear')) {
+        calculator.clear();
+        calculator.updateView();
     }
 
 })
+
