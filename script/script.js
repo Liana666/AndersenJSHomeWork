@@ -1,29 +1,33 @@
 class Calculator {
-    #currenOperand = '';
     #previosOperand = '';
-    #operation = '';
+    #newOperand = '';
+    #operator = '';
     #degOrRad = 'deg';
 
     constructor(formValue) {
         this.formValue = formValue;
     }
 
-    clear() {
-        this.#currenOperand = '';
-        this.#previosOperand = '';
-        this.#operation = '';
-    }
-
-    delete() {
-        this.#currenOperand = this.#currenOperand.slice(0, this.#currenOperand.length - 1);
-    }
-
     appendNumber(number) {
-        if (number === '.' && this.#currenOperand.includes('.')) {
+        const isOnePoint = number === '.' && this.#newOperand.includes('.');
+
+        if (isOnePoint) {
             return;
         }
 
-        this.#currenOperand = this.#currenOperand.toString() + number.toString();
+        this.#newOperand = this.#newOperand.toString() + number.toString();
+    }
+
+    appendOperator(operator) {
+        const isEmptyOperand = this.#newOperand === '';
+
+        if (isEmptyOperand) {
+            return;
+        }
+
+        this.#previosOperand = this.#newOperand;
+        this.#operator = operator;
+        this.#newOperand = '';
     }
 
     setDegOrRad(value) {
@@ -34,186 +38,138 @@ class Calculator {
         return this.#degOrRad;
     }
 
-    changeOperation(operation) {
-        if (this.#currenOperand === '') {
-            return;
-        }
-
-        this.#previosOperand = this.#currenOperand;
-        this.#operation = operation;
-        this.#currenOperand = '';
-    }
-
-    mathematicalСompute() {
-        let operationResult;
+    mathematicСompute() {
         const prevNumber = parseFloat(this.#previosOperand);
-        const currentNumber = parseFloat(this.#currenOperand);
+        const newNumber = parseFloat(this.#newOperand);
+        const notValidNumbers = isNaN(prevNumber) || isNaN(newNumber);
 
+        let operationResult;
 
-        if (isNaN(prevNumber) || isNaN(currentNumber)) {
-            this.#currenOperand = 'Ошибка';
+        if (notValidNumbers) {
+            this.#newOperand = 'Ошибка';
         }
 
-        switch (this.#operation) {
+        switch (this.#operator) {
             case '+':
-                operationResult = prevNumber + currentNumber;
+                operationResult = prevNumber + newNumber;
                 break;
 
             case '-':
-                operationResult = prevNumber - currentNumber;
+                operationResult = prevNumber - newNumber;
                 break;
 
             case '×':
-                operationResult = prevNumber * currentNumber;
+                operationResult = prevNumber * newNumber;
                 break;
 
             case '÷':
-                operationResult = prevNumber / currentNumber;
+                operationResult = prevNumber / newNumber;
                 break;
 
             default:
                 return;
         }
 
-        this.#currenOperand = Number.isFinite(operationResult) ? Math.round(operationResult * 100000000) / 100000000 : 'Ошибка';
-        this.#operation = '';
+        this.#newOperand = Number.isFinite(operationResult) ? Math.round(operationResult * 100000000) / 100000000 : 'Ошибка';
+        this.#operator = '';
         this.#previosOperand = '';
+    }
+
+    changeAppendNumber(operation) {
+        const isEmptyOperand = this.#newOperand === '';
+        const notEmptyOperand = this.#newOperand !== '';
+        const prevNumber = parseFloat(this.#previosOperand);
+        const newNumber = parseFloat(this.#newOperand);
+        const notValidNumbers = isNaN(prevNumber) || isNaN(newNumber);
+
+        if (isEmptyOperand) {
+            return;
+        }
+
+        if (notValidNumbers) {
+            this.#newOperand = 'Ошибка';
+        }
+
+        switch (operation) {
+            case '±':
+                notEmptyOperand ? this.#newOperand = -newNumber : this.#previosOperand = -prevNumber;
+                break;
+
+            case '1/x':
+                notEmptyOperand ? this.#newOperand = 1 / newNumber : this.#previosOperand = 1 / prevNumber;
+                break;
+
+            case '√x':
+                notEmptyOperand ? this.#newOperand = Math.sqrt(newNumber) : this.#previosOperand = Math.sqrt(prevNumber);
+                break;
+
+            case 'x!':
+                notEmptyOperand ? this.#newOperand = this.factorial(newNumber) : this.#previosOperand = this.factorial(prevNumber);
+                break;
+
+            default:
+                return;
+        }
     }
 
     factorial(number) {
         return number !== 1 ? number * this.factorial(number - 1) : 1;
     }
 
+    trigonometricCompute(operation) {
+        const newNumber = parseFloat(this.#newOperand);
+        const notEmptyOperand = this.#newOperand !== '';
+        const notValidNumber = isNaN(newNumber);
+        const isDeg = this.#degOrRad === 'deg';
 
-    changeNumber(operation) {
+        let operationResult;
 
-        console.log(operation)
-        if (this.#currenOperand === '') {
-            return;
+        if (notValidNumber) {
+            this.#newOperand = 'Ошибка';
         }
 
         switch (operation) {
-            case '±':
 
-                if (this.#currenOperand !== '') {
-                    this.#currenOperand = -this.#currenOperand;
-                } else {
-                    this.#previosOperand = -this.#previosOperand;
-                }
-
-                break;
-
-
-            case '1/x':
-
-                if (this.#currenOperand !== '') {
-                    this.#currenOperand = 1 / this.#currenOperand;
-                } else {
-                    this.#previosOperand = 1 / this.#previosOperand;
-                }
-
-                break;
-
-
-            case '√x':
-
-                if (this.#currenOperand !== '') {
-                    this.#currenOperand = Math.sqrt(this.#currenOperand);
-                } else {
-                    this.#previosOperand = Math.sqrt(this.#previosOperand);
-                }
-
-                break;
-
-
-            case 'x!':
-
-                if (this.#currenOperand !== '') {
-                    this.#currenOperand = this.factorial(this.#currenOperand);
-                } else {
-                    this.#previosOperand = this.factorial(this.#previosOperand);
-                }
-
-                break;
-
-
-            default:
-                return;
-        }
-    }
-
-
-
-    trigonometricCompute(operation) {
-        let operationResult;
-        const currentNumber = parseFloat(this.#currenOperand);
-
-        this.#operation = operation;
-
-        if (isNaN(currentNumber)) {
-            this.#currenOperand = 'Ошибка';
-        }
-
-        switch (this.#operation) {
             case 'sin':
-
-                if (this.#degOrRad === 'deg') {
-                    operationResult = Math.sin(currentNumber * Math.PI / 180);
-                } else {
-                    operationResult = Math.sin(currentNumber);
-                }
-
+                operationResult = isDeg ? Math.sin(newNumber * Math.PI / 180) : Math.sin(newNumber);
                 break;
-
 
             case 'cos':
-
-                if (this.#degOrRad === 'deg') {
-                    operationResult = Math.cos(currentNumber * Math.PI / 180);
-                } else {
-                    operationResult = Math.cos(currentNumber);
-                }
-
+                operationResult = isDeg ? Math.cos(newNumber * Math.PI / 180) : Math.cos(newNumber);
                 break;
-
 
             case 'tan':
-
-                if (this.#degOrRad === 'deg') {
-                    operationResult = Math.tan(currentNumber * Math.PI / 180);
-                } else {
-                    operationResult = Math.tan(currentNumber);
-                }
-
+                operationResult = isDeg ? Math.tan(newNumber * Math.PI / 180) : Math.tan(newNumber);
                 break;
-
 
             case 'ctg':
-
-                if (this.#degOrRad === 'deg') {
-                    operationResult = 1 / Math.tan(currentNumber * Math.PI / 180);
-                } else {
-                    operationResult = 1 / Math.tan(currentNumber);
-                }
-
+                operationResult = isDeg ? 1 / Math.tan(newNumber * Math.PI / 180) : 1 / Math.tan(newNumber);
                 break;
-
 
             default:
                 return;
         }
 
-        this.#currenOperand = Number.isFinite(operationResult) ? Math.round(operationResult * 100000000) / 100000000 : 'Ошибка';
-        this.#operation = '';
-        this.#previosOperand = '';
+        operationResult = Number.isFinite(operationResult) ? Math.round(operationResult * 100000000) / 100000000 : 'Ошибка'
+        notEmptyOperand ? this.#newOperand = operationResult : this.#previosOperand = operationResult;
     }
 
+    clear() {
+        this.#previosOperand = '';
+        this.#newOperand = '';
+        this.#operator = '';
+    }
+
+    delete() {
+        this.#newOperand = this.#previosOperand + this.#operator + this.#newOperand;
+        this.#previosOperand = '';
+        this.#operator = '';
+        this.#newOperand = this.#newOperand.slice(0, this.#newOperand.length - 1);
+    }
 
     updateView() {
-        this.formValue.value = this.#previosOperand + this.#operation + this.#currenOperand;
+        this.formValue.value = this.#previosOperand + this.#operator + this.#newOperand;
     }
-
-
 }
 
 
@@ -239,12 +195,12 @@ keyboard.addEventListener('click', function onclickKey(e) {
     }
 
     if (targetElement.hasAttribute('data-operation')) {
-        calculator.changeOperation(targetElementText);
+        calculator.appendOperator(targetElementText);
         calculator.updateView();
     }
 
     if (targetElement.hasAttribute('data-equal')) {
-        calculator.mathematicalСompute();
+        calculator.mathematicСompute();
         calculator.updateView();
         calculator.clear();
     }
@@ -274,15 +230,14 @@ keyboard.addEventListener('click', function onclickKey(e) {
     }
 
     if (targetElement.hasAttribute('data-constant')) {
-        let constant;
-        targetElementText === '𝜋' ? constant = Math.PI.toFixed(8) : constant = Math.E.toFixed(8)
+        const constant = targetElementText === '𝜋' ? Math.PI.toFixed(8) : Math.E.toFixed(8)
 
         calculator.appendNumber(constant);
         calculator.updateView();
     }
 
     if (targetElement.hasAttribute('data-change-number')) {
-        calculator.changeNumber(targetElementText);
+        calculator.changeAppendNumber(targetElementText);
         calculator.updateView();
     }
 
