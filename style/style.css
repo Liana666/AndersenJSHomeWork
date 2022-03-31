@@ -69,6 +69,8 @@ body {
 .calculator__keyboard {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+
+    transition: 0.5s ease 0s;
 }
 
 .calculator.scale .calculator__keyboard {
